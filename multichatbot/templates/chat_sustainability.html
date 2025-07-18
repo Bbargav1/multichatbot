@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Sustainability Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+.sustainability-chat-container {
+    background-color: #f8f9fa;
+    border-left: 5px solid #20c997;
+    font-family: 'Roboto', sans-serif;
+}
+
+.sustainability-header {
+    background: linear-gradient(135deg, #20c997, #17a2b8);
+    color: white;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.user-message.sustainability {
+    background: white;
+    border-radius: 18px 18px 0 18px;
+    border: 1px solid #20c997;
+}
+
+.bot-message.sustainability {
+    background: rgba(32, 201, 151, 0.1);
+    border-left: 4px solid #20c997;
+}
+
+.tip-card {
+    background-color: #d1f7ec;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.btn-sustainability {
+    background-color: #20c997;
+    color: white;
+    border-color: #20c997;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="sustainability-chat-container rounded shadow-lg p-0">
+    <div class="sustainability-header">
+        <i class="fas fa-recycle me-2"></i> Sustainability Assistant
+    </div>
+    
+    <div class="chat-messages p-4" id="chat-messages">
+        <div class="bot-message sustainability">
+            <p>Hello eco-warrior! How can I help you with sustainable living, green technologies, or environmental concerns today?</p>
+        </div>
+    </div>
+    
+    <div class="input-group p-3 bg-light">
+        <input type="text" id="user-input" class="form-control" placeholder="Ask about recycling, energy saving, or eco-friendly products...">
+        <button class="btn btn-sustainability" id="send-button">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sendButton = document.getElementById('send-button');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+    let conversationHistory = [];
+    
+    function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message sustainability' : 'bot-message sustainability';
+        
+        const messageContent = document.createElement('p');
+        messageContent.textContent = message;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    async function sendMessageToAPI(message) {
+        try {
+            // Add user message to conversation history
+            conversationHistory.push({
+                role: "user",
+                content: message
+            });
+            
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot: 'sustainability',
+                    message: message,
+                    history: conversationHistory
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: data.response
+            });
+            
+            addMessage(data.response, false);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I'm having trouble connecting to the sustainability assistant. Please try again later.", false);
+        }
+    }
+    
+    sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            userInput.value = '';
+            sendMessageToAPI(message);
+        }
+    });
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+});
+</script>
+{% endblock %}

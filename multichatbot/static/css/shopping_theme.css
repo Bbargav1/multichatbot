@@ -1,0 +1,349 @@
+/* Shopping Theme - Modern e-commerce styling */
+:root {
+    --shop-primary: #FF6B6B;       /* Coral Red */
+    --shop-secondary: #4ECDC4;     /* Tiffany Blue */
+    --shop-accent: #FFBE0B;        /* Amber */
+    --shop-dark: #2F3640;          /* Dark Blue Gray */
+    --shop-light: #F5F6FA;         /* Light Gray */
+    --shop-text: #2F3640;          /* Dark Blue Gray */
+    --shop-bg: #FFFFFF;            /* White */
+    --shop-card: #F5F6FA;          /* Light Gray */
+    --shop-sale: #FF4757;          /* Bright Red */
+}
+
+/* Base Styles */
+body {
+    font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--shop-bg);
+    color: var(--shop-text);
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/shopping_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+/* Header Styles */
+.chat-header {
+    background: linear-gradient(135deg, var(--shop-primary) 0%, var(--shop-accent) 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Price Tag Decoration */
+.chat-header::after {
+    content: 'SALE';
+    position: absolute;
+    top: 10px;
+    right: -30px;
+    background-color: var(--shop-sale);
+    color: white;
+    padding: 0.2rem 2rem;
+    transform: rotate(45deg);
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Chat Container */
+.chat-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+}
+
+/* Message Area */
+.message-area {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--shop-card);
+    background-image: url('../images/shopping-pattern.png');
+    background-blend-mode: overlay;
+    background-size: 200px;
+}
+
+/* Message Bubbles */
+.message {
+    margin-bottom: 1.2rem;
+    max-width: 70%;
+    padding: 0.9rem 1.3rem;
+    border-radius: 20px;
+    line-height: 1.4;
+    position: relative;
+    clear: both;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.user-message {
+    background: linear-gradient(135deg, var(--shop-primary) 0%, var(--shop-accent) 100%);
+    color: white;
+    float: right;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: white;
+    color: var(--shop-text);
+    float: left;
+    border-bottom-left-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Product Cards in Messages */
+.product-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.product-name {
+    font-weight: bold;
+    color: var(--shop-primary);
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--shop-dark);
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+}
+
+.sale-price {
+    color: var(--shop-sale);
+}
+
+.product-rating {
+    color: var(--shop-accent);
+    margin: 0.3rem 0;
+}
+
+/* Timestamps */
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.user-message .message-time {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bot-message .message-time {
+    text-align: left;
+    color: rgba(47, 54, 64, 0.7);
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 1.2rem;
+    background-color: var(--shop-dark);
+    border-top: 1px solid #ddd;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    background-color: white;
+    color: var(--shop-text);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-area button {
+    background: linear-gradient(135deg, var(--shop-secondary) 0%, #00C9FF 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0 1.8rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+}
+
+.input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Special Offers Section */
+.special-offers {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 1rem;
+    border-top: 1px dashed #ddd;
+}
+
+.special-offers h3 {
+    color: var(--shop-primary);
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.offer-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    gap: 1rem;
+}
+
+.offer-item {
+    flex: 0 0 auto;
+    width: 150px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.8rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.offer-item img {
+    width: 100%;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+
+.offer-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.offer-price {
+    font-size: 0.9rem;
+    color: var(--shop-sale);
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+    }
+    
+    .message-area {
+        height: calc(100vh - 220px);
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+    
+    .input-area {
+        padding: 1rem;
+    }
+    
+    .input-area button {
+        padding: 0 1.2rem;
+    }
+}
+
+/* Animation for special elements */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.hot-deal {
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+.hot-deal::after {
+    content: 'HOT';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--shop-sale);
+    color: white;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    font-weight: bold;
+}
+
+/* Shopping cart icon */
+.cart-icon {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--shop-primary);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+    background-color: var(--shop-sale);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--shop-dark);
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

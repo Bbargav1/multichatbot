@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Medical Chat{% endblock %}
+
+{% block extra_css %}
+<style>
+.medical-chat-container {
+    background-color: #f8f9fa;
+    border-left: 5px solid #d63384;
+    font-family: 'Roboto', sans-serif;
+}
+
+.medical-header {
+    background: linear-gradient(135deg, #d63384, #a61d4d);
+    color: white;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.user-message.medical {
+    background: white;
+    border-radius: 18px 18px 0 18px;
+    border: 1px solid #d63384;
+}
+
+.bot-message.medical {
+    background: rgba(214, 51, 132, 0.1);
+    border-left: 4px solid #d63384;
+}
+
+.warning-note {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.btn-danger {
+    background-color: #d63384;
+    border-color: #d63384;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="medical-chat-container rounded shadow-lg p-0">
+    <div class="medical-header">
+        <i class="fas fa-heartbeat me-2"></i> Medical Assistant
+    </div>
+    
+    <div class="chat-messages p-4" id="chat-messages">
+        <div class="warning-note">
+            <strong><i class="fas fa-exclamation-triangle"></i> Important:</strong> 
+            This is not a substitute for professional medical advice. Always consult a healthcare provider.
+        </div>
+        <div class="bot-message medical">
+            <p>Hello! I can provide general health information. What would you like to know about today?</p>
+        </div>
+    </div>
+    
+    <div class="input-group p-3 bg-light">
+        <input type="text" id="user-input" class="form-control" placeholder="Describe your symptoms or ask a health question...">
+        <button class="btn btn-danger" id="send-button">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sendButton = document.getElementById('send-button');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+    let conversationHistory = [];
+    
+    function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message medical' : 'bot-message medical';
+        
+        const messageContent = document.createElement('p');
+        messageContent.textContent = message;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    async function sendMessageToAPI(message) {
+        try {
+            // Add user message to conversation history
+            conversationHistory.push({
+                role: "user",
+                content: message
+            });
+            
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot: 'medical',
+                    message: message,
+                    history: conversationHistory
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: data.response
+            });
+            
+            addMessage(data.response, false);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I'm having trouble connecting to the medical assistant. Please try again later.", false);
+        }
+    }
+    
+    sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            userInput.value = '';
+            sendMessageToAPI(message);
+        }
+    });
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+});
+</script>
+{% endblock %}

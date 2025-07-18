@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block title %}Legal Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+.legal-chat-container {
+    background-color: #f8f9fa;
+    border-left: 5px solid #6f42c1;
+    font-family: 'Roboto', sans-serif;
+}
+
+.legal-header {
+    background: linear-gradient(135deg, #6f42c1, #563d7c);
+    color: white;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.user-message.legal {
+    background: white;
+    border-radius: 18px 18px 0 18px;
+    border: 1px solid #6f42c1;
+}
+
+.bot-message.legal {
+    background: rgba(111, 66, 193, 0.1);
+    border-left: 4px solid #6f42c1;
+}
+
+.disclaimer-note {
+    background-color: #f1e8ff;
+    border-left: 4px solid #6f42c1;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 0.9em;
+}
+
+.btn-purple {
+    background-color: #6f42c1;
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="legal-chat-container rounded shadow-lg p-0">
+    <div class="legal-header">
+        <i class="fas fa-balance-scale me-2"></i> Legal Assistant
+    </div>
+    
+    <div class="chat-messages p-4" id="chat-messages">
+        <div class="disclaimer-note">
+            <strong><i class="fas fa-exclamation-triangle"></i> Disclaimer:</strong> 
+            This is not legal advice. For legal matters, please consult a qualified attorney.
+        </div>
+        <div class="bot-message legal">
+            <p>Hello! I can provide general legal information. What would you like to know about today?</p>
+        </div>
+    </div>
+    
+    <div class="input-group p-3 bg-light">
+        <input type="text" id="user-input" class="form-control" placeholder="Ask about contracts, rights, or legal processes...">
+        <button class="btn btn-purple" id="send-button">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sendButton = document.getElementById('send-button');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+    let conversationHistory = [];
+    
+    function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message legal' : 'bot-message legal';
+        
+        const messageContent = document.createElement('p');
+        messageContent.textContent = message;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    async function sendMessageToAPI(message) {
+        try {
+            // Add user message to conversation history
+            conversationHistory.push({
+                role: "user",
+                content: message
+            });
+            
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot: 'legal',
+                    message: message,
+                    history: conversationHistory
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: data.response
+            });
+            
+            addMessage(data.response, false);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I'm having trouble connecting to the legal assistant. Please try again later.", false);
+        }
+    }
+    
+    sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            userInput.value = '';
+            sendMessageToAPI(message);
+        }
+    });
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+});
+</script>
+{% endblock %}

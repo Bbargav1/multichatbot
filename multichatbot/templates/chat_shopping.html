@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+.shopping-chat-container {
+    background-color: #f8f9fa;
+    border-left: 5px solid #fd7e14;
+    font-family: 'Roboto', sans-serif;
+}
+
+.shopping-header {
+    background: linear-gradient(135deg, #fd7e14, #e86100);
+    color: white;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.user-message.shopping {
+    background: white;
+    border-radius: 18px 18px 0 18px;
+    border: 1px solid #fd7e14;
+}
+
+.bot-message.shopping {
+    background: rgba(253, 126, 20, 0.1);
+    border-left: 4px solid #fd7e14;
+}
+
+.product-card {
+    background-color: #ffecdf;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="shopping-chat-container rounded shadow-lg p-0">
+    <div class="shopping-header">
+        <i class="fas fa-shopping-cart me-2"></i> Shopping Assistant
+    </div>
+    
+    <div class="chat-messages p-4" id="chat-messages">
+        <div class="bot-message shopping">
+            <p>Hello shopper! How can I help you find products, compare options, or make purchasing decisions today?</p>
+        </div>
+    </div>
+    
+    <div class="input-group p-3 bg-light">
+        <input type="text" id="user-input" class="form-control" placeholder="Ask about products, deals, or shopping recommendations...">
+        <button class="btn btn-warning" id="send-button" style="background-color: #fd7e14; color: white;">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sendButton = document.getElementById('send-button');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+    let conversationHistory = [];
+    
+    function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message shopping' : 'bot-message shopping';
+        
+        const messageContent = document.createElement('p');
+        messageContent.textContent = message;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    async function sendMessageToAPI(message) {
+        try {
+            // Add user message to conversation history
+            conversationHistory.push({
+                role: "user",
+                content: message
+            });
+            
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot: 'shopping',
+                    message: message,
+                    history: conversationHistory
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: data.response
+            });
+            
+            addMessage(data.response, false);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I'm having trouble connecting to the shopping assistant. Please try again later.", false);
+        }
+    }
+    
+    sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            userInput.value = '';
+            sendMessageToAPI(message);
+        }
+    });
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,361 @@
+/* Travel Theme - Adventurous and wanderlust-inspired */
+:root {
+    --travel-primary: #4285F4;     /* Google Blue */
+    --travel-secondary: #34A853;   /* Google Green */
+    --travel-accent: #EA4335;      /* Google Red */
+    --travel-yellow: #FBBC05;      /* Google Yellow */
+    --travel-dark: #202124;        /* Dark Gray */
+    --travel-light: #F8F9FA;       /* Light Gray */
+    --travel-text: #3C4043;        /* Dark Gray */
+    --travel-bg: #E8F0FE;         /* Very Light Blue */
+    --travel-card: #FFFFFF;        /* White */
+    --travel-highlight: #1A73E8;   /* Darker Blue */
+}
+
+/* Base Styles */
+body {
+    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+    background-color: var(--travel-bg);
+    color: var(--travel-text);
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/travel_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.chat-header {
+    background: linear-gradient(135deg, var(--travel-primary) 0%, var(--travel-secondary) 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Passport Stamp Decoration */
+.chat-header::after {
+    content: '✈';
+    position: absolute;
+    top: -15px;
+    right: 15px;
+    font-size: 3rem;
+    opacity: 0.2;
+    transform: rotate(20deg);
+}
+
+/* Chat Container */
+.chat-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #DADCE0;
+}
+
+/* Message Area */
+.message-area {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--travel-light);
+    background-image: url('../images/map-pattern.png');
+    background-blend-mode: overlay;
+    background-size: 300px;
+    opacity: 0.95;
+}
+
+/* Message Bubbles */
+.message {
+    margin-bottom: 1.2rem;
+    max-width: 75%;
+    padding: 1rem 1.5rem;
+    border-radius: 18px;
+    line-height: 1.6;
+    position: relative;
+    clear: both;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.user-message {
+    background: linear-gradient(135deg, var(--travel-primary) 0%, var(--travel-highlight) 100%);
+    color: white;
+    float: right;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: var(--travel-card);
+    color: var(--travel-text);
+    float: left;
+    border-bottom-left-radius: 5px;
+    border-left: 4px solid var(--travel-secondary);
+}
+
+/* Destination Cards */
+.destination-card {
+    border: 1px solid #DADCE0;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    background-color: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.destination-name {
+    font-weight: bold;
+    color: var(--travel-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.destination-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.destination-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--travel-text);
+}
+
+.destination-rating {
+    color: var(--travel-yellow);
+    font-weight: bold;
+}
+
+/* Flight Info */
+.flight-info {
+    background-color: #F1F3F4;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-left: 4px solid var(--travel-primary);
+}
+
+.flight-route {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.flight-airports {
+    font-weight: bold;
+    color: var(--travel-primary);
+}
+
+.flight-duration {
+    font-size: 0.9rem;
+    color: var(--travel-text);
+}
+
+.flight-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Timestamps */
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.user-message .message-time {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bot-message .message-time {
+    text-align: left;
+    color: rgba(60, 64, 67, 0.7);
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 1.2rem;
+    background-color: var(--travel-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-area input {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    background-color: white;
+    color: var(--travel-text);
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+}
+
+.input-area button {
+    background: linear-gradient(135deg, var(--travel-secondary) 0%, var(--travel-primary) 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0 1.8rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(52, 168, 83, 0.3);
+}
+
+/* Travel Deals Section */
+.travel-deals {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 1rem;
+    border-top: 1px solid #DADCE0;
+}
+
+.deals-title {
+    color: var(--travel-primary);
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.deal-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    gap: 1rem;
+}
+
+.deal-item {
+    flex: 0 0 auto;
+    width: 200px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.8rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.deal-image {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.deal-location {
+    font-weight: bold;
+    color: var(--travel-primary);
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.deal-price {
+    color: var(--travel-accent);
+    font-weight: bold;
+}
+
+.deal-duration {
+    font-size: 0.8rem;
+    color: var(--travel-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+    }
+    
+    .message-area {
+        height: calc(100vh - 220px);
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+    
+    .input-area {
+        padding: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes takeoff {
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-20px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0); }
+}
+
+.animated-plane {
+    animation: takeoff 3s infinite;
+    display: inline-block;
+}
+
+/* Travel Icons */
+.travel-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: var(--travel-primary);
+}
+
+/* Compass Element */
+.compass {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--travel-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(66, 133, 244, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    font-size: 1.5rem;
+}
+
+.compass:hover {
+    transform: scale(1.1) rotate(30deg);
+    background-color: var(--travel-highlight);
+}

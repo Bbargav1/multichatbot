@@ -1,0 +1,233 @@
+/* Sustainability Theme - Eco-friendly color palette and nature-inspired design */
+:root {
+    --eco-primary: #2E8B57;       /* Sea Green */
+    --eco-secondary: #3CB371;     /* Medium Sea Green */
+    --eco-light: #98FB98;         /* Pale Green */
+    --eco-dark: #006400;          /* Dark Green */
+    --eco-accent: #8FBC8F;        /* Dark Sea Green */
+    --eco-text: #2F4F4F;          /* Dark Slate Gray */
+    --eco-bg: #F5FFFA;            /* Mint Cream */
+    --eco-card: #E0F7E0;          /* Very Pale Green */
+}
+
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--eco-bg);
+    color: var(--eco-text);
+    background-image: url('../images/sustainability_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-blend-mode: overlay;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Styles */
+.chat-header {
+    background-color: var(--eco-primary);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 3px solid var(--eco-dark);
+    box-shadow: 0 2px 10px rgba(46, 139, 87, 0.3);
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.chat-header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Chat Container */
+.chat-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 100, 0, 0.2);
+    border: 1px solid var(--eco-accent);
+}
+
+/* Message Area */
+.message-area {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--eco-card);
+    background-image: url('../images/leaf-pattern.png');
+    background-blend-mode: overlay;
+    background-size: 300px;
+    opacity: 0.95;
+}
+
+/* Message Bubbles */
+.message {
+    margin-bottom: 1rem;
+    max-width: 70%;
+    padding: 0.8rem 1.2rem;
+    border-radius: 18px;
+    line-height: 1.4;
+    position: relative;
+    clear: both;
+}
+
+.user-message {
+    background-color: var(--eco-secondary);
+    color: white;
+    float: right;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: white;
+    color: var(--eco-text);
+    float: left;
+    border-bottom-left-radius: 5px;
+    border: 1px solid var(--eco-accent);
+}
+
+/* Timestamps */
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+.user-message .message-time {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bot-message .message-time {
+    text-align: left;
+    color: rgba(47, 79, 79, 0.7);
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 1rem;
+    background-color: var(--eco-primary);
+    border-top: 1px solid var(--eco-dark);
+}
+
+.input-area input {
+    flex: 1;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    outline: none;
+    background-color: var(--eco-light);
+    color: var(--eco-text);
+}
+
+.input-area button {
+    background-color: var(--eco-dark);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 0.8rem 1.5rem;
+    margin-left: 0.8rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.input-area button:hover {
+    background-color: var(--eco-secondary);
+    transform: translateY(-2px);
+}
+
+/* Eco Tips Section */
+.eco-tips {
+    background-color: var(--eco-card);
+    padding: 1rem;
+    border-top: 1px dashed var(--eco-accent);
+    font-size: 0.9rem;
+}
+
+.eco-tips h3 {
+    color: var(--eco-dark);
+    margin-top: 0;
+    text-align: center;
+}
+
+.eco-tips ul {
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.eco-tips li {
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+    }
+    
+    .message-area {
+        height: calc(100vh - 200px);
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+}
+
+/* Animation for bot thinking */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.thinking {
+    animation: pulse 1.5s infinite;
+    font-style: italic;
+    color: var(--eco-dark);
+}
+
+/* Leaf decoration elements */
+.leaf-decoration {
+    position: absolute;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.leaf-1 {
+    top: 10%;
+    left: 5%;
+    transform: rotate(30deg);
+    font-size: 5rem;
+    color: var(--eco-primary);
+}
+
+.leaf-2 {
+    bottom: 15%;
+    right: 5%;
+    transform: rotate(-20deg);
+    font-size: 4rem;
+    color: var(--eco-secondary);
+}
+
+/* Sustainability icons */
+.sustainability-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    color: var(--eco-primary);
+}

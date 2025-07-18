@@ -1,0 +1,15 @@
+:root {
+    --primary: #2e7d32;
+    --secondary: #c8e6c9;
+    --bg-image: url('../images/farm_bg.jpg');
+}
+
+.chat-container {
+    background-color: #e8f5e9;
+    border-left: 5px solid var(--primary);
+}
+
+.bot-response {
+    background-color: var(--secondary);
+    color: #1b5e20;
+}

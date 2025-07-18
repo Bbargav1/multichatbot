@@ -1,0 +1,316 @@
+/* Mental Health Theme - Soothing and supportive styling */
+:root {
+    --mh-primary: #6C63FF;
+    --mh-secondary: #64DFDF;
+    --mh-accent: #FF6584;
+    --mh-dark: #25274D;
+    --mh-light: #F8F9FF;
+    --mh-text: #464866;
+    --mh-bg: #F8F9FF;
+    --mh-card: #FFFFFF;
+    --mh-crisis: #FF6584;
+}
+
+/* Base Styles */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--mh-bg);
+    color: var(--mh-text);
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/mentalhealth_bg.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.chat-header {
+    background: linear-gradient(135deg, var(--mh-primary) 0%, var(--mh-secondary) 100%);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.2);
+}
+
+.chat-header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.chat-header p {
+    margin: 0.5rem 0 0;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* Chat Container */
+.chat-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Message Area */
+.message-area {
+    height: 500px;
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--mh-light);
+    background-image: url('../images/mindfulness-pattern.png');
+    background-blend-mode: overlay;
+    background-size: 300px;
+    opacity: 1; /* fixed background-opacity */
+}
+
+/* Message Bubbles */
+.message {
+    margin-bottom: 1.2rem;
+    max-width: 75%;
+    padding: 1rem 1.5rem;
+    border-radius: 20px;
+    line-height: 1.6;
+    position: relative;
+    clear: both;
+    transition: all 0.3s ease;
+}
+
+.user-message {
+    background: linear-gradient(135deg, var(--mh-primary) 0%, var(--mh-accent) 100%);
+    color: white;
+    float: right;
+    border-bottom-right-radius: 5px;
+}
+
+.bot-message {
+    background-color: var(--mh-card);
+    color: var(--mh-text);
+    float: left;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--mh-secondary);
+}
+
+/* Crisis Alert */
+.crisis-alert {
+    background-color: rgba(255, 101, 132, 0.15);
+    border-left: 4px solid var(--mh-crisis);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+    animation: pulseAlert 2s infinite;
+}
+
+.crisis-alert p {
+    margin: 0;
+    color: var(--mh-dark);
+    font-weight: 600;
+}
+
+.crisis-alert a {
+    color: var(--mh-crisis);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Breathing Exercise */
+.breathing-exercise {
+    background-color: rgba(100, 223, 223, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    border: 1px dashed var(--mh-secondary);
+}
+
+.breathing-circle {
+    width: 100px;
+    height: 100px;
+    background-color: var(--mh-secondary);
+    border-radius: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    animation: breathe 8s infinite;
+}
+
+/* Timestamps */
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+.user-message .message-time {
+    text-align: right;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.bot-message .message-time {
+    text-align: left;
+    color: rgba(70, 72, 102, 0.7);
+}
+
+/* Input Area */
+.input-area {
+    display: flex;
+    padding: 1.2rem;
+    background-color: var(--mh-dark);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-area input {
+    flex: 1;
+    padding: 0.9rem 1.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--mh-text);
+    font-family: 'Nunito', sans-serif;
+}
+
+.input-area button {
+    background: linear-gradient(135deg, var(--mh-secondary) 0%, var(--mh-primary) 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 0 1.8rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(100, 223, 223, 0.4);
+}
+
+/* Resources Section */
+.mental-health-resources {
+    background-color: rgba(248, 249, 255, 0.9);
+    padding: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.resources-title {
+    color: var(--mh-primary);
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+.resource-item {
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.resource-item a {
+    color: var(--mh-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.resource-item p {
+    margin: 0.3rem 0 0;
+    font-size: 0.9rem;
+    color: var(--mh-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chat-container {
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+    }
+
+    .message-area {
+        height: calc(100vh - 220px);
+    }
+
+    .message {
+        max-width: 85%;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .input-area {
+        padding: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes breathe {
+    0%, 100% { transform: scale(0.9); opacity: 0.7; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
+
+@keyframes pulseAlert {
+    0% { box-shadow: 0 0 0 0 rgba(255, 101, 132, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 101, 132, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 101, 132, 0); }
+}
+
+/* Mindfulness Elements */
+.mindfulness-prompt {
+    text-align: center;
+    margin: 1rem 0;
+    font-style: italic;
+    color: var(--mh-primary);
+}
+
+.affirmation {
+    background-color: rgba(108, 99, 255, 0.1);
+    border-left: 4px solid var(--mh-primary);
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 8px 8px 0;
+}
+
+/* Emergency Button */
+.emergency-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--mh-crisis);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(255, 101, 132, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    font-weight: bold;
+    text-align: center;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.emergency-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(255, 101, 132, 0.4);
+}

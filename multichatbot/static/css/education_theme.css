@@ -1,0 +1,87 @@
+/* education_theme.css */
+:root {
+  /* Color Palette */
+  --primary-color: #3f51b5;  /* Indigo - represents knowledge */
+  --secondary-color: #ffc107;  /* Amber - for highlights */
+  --light-bg: #f5f5f5;  /* Light gray background */
+  --dark-text: #212121;  /* Dark gray for text */
+  --accent-color: #e91e63;  /* Pink for interactive elements */
+  
+  /* Theme Assets */
+  --bg-pattern: url('../images/education_bg.jpg');
+  --icon-font: 'Font Awesome 5 Free';
+}
+
+/* Main Chat Container */
+.chat-container {
+  background-color: var(--light-bg);
+  background-image: var(--bg-pattern);
+  background-blend-mode: overlay;
+  border-left: 8px solid var(--primary-color);
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+/* Header Styling */
+.chat-header {
+  background: linear-gradient(135deg, var(--primary-color), #5c6bc0);
+  color: white;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.chat-header::before {
+  content: "\f19d";  /* Graduation cap icon */
+  font-family: var(--icon-font);
+  margin-right: 10px;
+}
+
+/* Message Bubbles */
+.user-message {
+  background-color: white;
+  border: 2px solid var(--secondary-color);
+  color: var(--dark-text);
+  border-radius: 18px 18px 0 18px;
+}
+
+.bot-message {
+  background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+  color: var(--dark-text);
+  border-radius: 18px 18px 18px 0;
+  border-left: 4px solid var(--primary-color);
+}
+
+/* Special Elements */
+.key-term {
+  color: var(--primary-color);
+  font-weight: bold;
+  border-bottom: 1px dashed var(--accent-color);
+}
+
+.formula {
+  font-family: 'Courier New', monospace;
+  background-color: #fffde7;
+  padding: 5px 10px;
+  border-left: 3px solid var(--secondary-color);
+}
+
+/* Input Area */
+#user-input {
+  border: 2px solid var(--primary-color);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+#send-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#send-button:hover {
+  background-color: var(--accent-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-container {
+    border-left-width: 5px;
+  }
+}

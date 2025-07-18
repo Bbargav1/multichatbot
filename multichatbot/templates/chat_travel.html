@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+
+{% block title %}Travel Assistant{% endblock %}
+
+{% block extra_css %}
+<style>
+.travel-chat-container {
+    background-color: #f8f9fa;
+    border-left: 5px solid #0d6efd;
+    font-family: 'Roboto', sans-serif;
+}
+
+.travel-header {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    padding: 16px;
+    font-weight: 500;
+}
+
+.user-message.travel {
+    background: white;
+    border-radius: 18px 18px 0 18px;
+    border: 1px solid #0d6efd;
+}
+
+.bot-message.travel {
+    background: rgba(13, 110, 253, 0.1);
+    border-left: 4px solid #0d6efd;
+}
+
+.destination-card {
+    background-color: #e7f1ff;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.btn-travel {
+    background-color: #0d6efd;
+    color: white;
+    border-color: #0d6efd;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="travel-chat-container rounded shadow-lg p-0">
+    <div class="travel-header">
+        <i class="fas fa-plane me-2"></i> Travel Assistant
+    </div>
+    
+    <div class="chat-messages p-4" id="chat-messages">
+        <div class="bot-message travel">
+            <p>Hello traveler! Where would you like to go today? I can help with destination recommendations, travel tips, and itinerary planning.</p>
+        </div>
+    </div>
+    
+    <div class="input-group p-3 bg-light">
+        <input type="text" id="user-input" class="form-control" placeholder="Ask about destinations, flights, hotels, or travel tips...">
+        <button class="btn btn-travel" id="send-button">
+            <i class="fas fa-paper-plane"></i> Send
+        </button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sendButton = document.getElementById('send-button');
+    const userInput = document.getElementById('user-input');
+    const chatMessages = document.getElementById('chat-messages');
+    let conversationHistory = [];
+    
+    function addMessage(message, isUser) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = isUser ? 'user-message travel' : 'bot-message travel';
+        
+        const messageContent = document.createElement('p');
+        messageContent.textContent = message;
+        
+        messageDiv.appendChild(messageContent);
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    
+    async function sendMessageToAPI(message) {
+        try {
+            // Add user message to conversation history
+            conversationHistory.push({
+                role: "user",
+                content: message
+            });
+            
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    bot: 'travel',
+                    message: message,
+                    history: conversationHistory
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            
+            const data = await response.json();
+            
+            // Add bot response to conversation history
+            conversationHistory.push({
+                role: "assistant",
+                content: data.response
+            });
+            
+            addMessage(data.response, false);
+            
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage("Sorry, I'm having trouble connecting to the travel assistant. Please try again later.", false);
+        }
+    }
+    
+    sendButton.addEventListener('click', function() {
+        const message = userInput.value.trim();
+        if (message) {
+            addMessage(message, true);
+            userInput.value = '';
+            sendMessageToAPI(message);
+        }
+    });
+    
+    userInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendButton.click();
+        }
+    });
+});
+</script>
+{% endblock %}

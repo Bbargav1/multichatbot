@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Home - DomainChat{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto text-center">
+        <h1 class="display-4 mb-4">Welcome to DomainChat</h1>
+        <p class="lead">Your specialized AI assistant for various professional domains</p>
+        
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                        <h5 class="card-title">Finance</h5>
+                        <p class="card-text">Get financial advice, market analysis, and investment strategies.</p>
+                        <a href="{{ url_for('finance_chat') }}" class="btn btn-primary">Try Finance Chat</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-heartbeat fa-3x text-danger mb-3"></i>
+                        <h5 class="card-title">Medical</h5>
+                        <p class="card-text">General health information and symptom checking (not medical advice).</p>
+                        <a href="{{ url_for('medical_chat') }}" class="btn btn-danger">Try Medical Chat</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <i class="fas fa-leaf fa-3x text-success mb-3"></i>
+                        <h5 class="card-title">Agriculture</h5>
+                        <p class="card-text">Farming techniques, crop management, and agricultural best practices.</p>
+                        <a href="{{ url_for('agriculture_chat') }}" class="btn btn-success">Try Agriculture Chat</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-md-6 mb-4">
+                <a href="{{ url_for('education_chat') }}" class="btn btn-outline-info btn-lg btn-block">
+                    <i class="fas fa-graduation-cap"></i> Education Chat
+                </a>
+            </div>
+            <div class="col-md-6 mb-4">
+                <a href="{{ url_for('legal_chat') }}" class="btn btn-outline-warning btn-lg btn-block">
+                    <i class="fas fa-balance-scale"></i> Legal Chat
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

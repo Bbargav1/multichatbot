@@ -1,0 +1,15 @@
+:root {
+    --primary: #0d47a1;
+    --secondary: #bbdefb;
+    --bg-image: url('../images/medical_bg.jpg');
+}
+
+.chat-container {
+    background-color: #e3f2fd;
+    border-left: 5px solid var(--primary);
+}
+
+.bot-response {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
