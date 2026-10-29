@@ -1,0 +1,7 @@
+:root { color-scheme: light; }
+body { min-height: 100vh; display: flex; flex-direction: column; background: #f6f8fb; color: #202938; }
+body > .container { flex: 1; }
+.navbar-brand { font-weight: 700; letter-spacing: .02em; }
+.card { border: 0; border-radius: 1rem; box-shadow: 0 8px 24px rgba(20, 40, 70, .08); }
+.card .btn { white-space: normal; }
+footer p { margin: 0; }
